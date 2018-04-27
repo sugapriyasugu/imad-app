@@ -1,14 +1,19 @@
-console.log('Loaded!');
-// change the content of main-text div
-var ele=document.getElementById('main-text');
-ele.innerHTML="Hello world";
-//move the image
-var img=document.getElementById('madi');
-var marginLeft=0;
-function moveRight(){
-    marginLeft+=1;
-    img.style.marginLeft=marginLeft+"px";
-}
-img.onclick=function(){
-    var interval=setInterval(moveRight,50);
+let button=document.getElementById('counter');
+button.onclick=function(){
+    //create a request object
+    var request=new XMLHttpRequest();
+    //capture the response and store it in a variable
+    request.onreadystatechange=function(){
+        if(request.readyState===XMLHttpRequest.DONE){
+            //Take some action
+            if(request.status===200){
+                let count=request.responseText;
+                let span=document.getElementById('count');
+                span.innerHTML=count;
+            }
+        }
+        //Not done yet
+    };
+    //Make the request
+    request.open('GET','https;//imad.hasura-app.io/counter');
 };
