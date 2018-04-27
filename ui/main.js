@@ -26,7 +26,7 @@ let submit=document.getElementById('submit_btn');
 submit.onclick=function(){
   //Make a request to the server and send the name
   //Capture a list of names and render it as a list
-  let names=[name1,name2,name3];
+  let names=['name1','name2','name3'];
   let list="";
   names.forEach(function(name){
       list+="<li>"+name+"</li>";
