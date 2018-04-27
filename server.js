@@ -12,50 +12,7 @@ var config = {
 var app = express();
 app.use(morgan('combined'));
 
-var articles={
-'article-one':{
-    title:'Article one | Sugapriya',
-    heading:'Article one',
-    date:' March 18, 2018',
-    content:`<p>
-                    This is the content for my first article.This is the content for my first article.This is the content for my first article.This is the content for my first article.
-                </p>
-                <p>
-                    This is the content for my first article.This is the content for my first article.This is the content for my first article.This is the content for my first article.
-                </p>
-                <p>
-                    This is the content for my first article.This is the content for my first article.This is the content for my first article.This is the content for my first article.
-                </p>`
-},
-'article-two':{
-    title:'Article two | Sugapriya',
-    heading:'Article two',
-    date:' March 18, 2018',
-    content:`<p>
-                    This is the content for my second article.This is the content for my second article.This is the content for my second article.This is the content for my second article.
-                </p>
-                <p>
-                    This is the content for my second article.This is the content for my second article.This is the content for my second article.This is the content for my second article.
-                </p>
-                <p>
-                    This is the content for my second article.This is the content for my second article.This is the content for my second article.This is the content for my second article.
-                </p>`
-},
-'article-three':{
-    title:'Article three | Sugapriya',
-    heading:'Article three',
-    date:' March 18, 2018',
-    content:`<p>
-                    This is the content for my third article.This is the content for my third article.This is the content for my third article.This is the content for my third article.
-                </p>
-                <p>
-                    This is the content for my third article.This is the content for my third article.This is the content for my third article.This is the content for my third article.
-                </p>
-                <p>
-                    This is the content for my third article.This is the content for my third article.This is the content for my third article.This is the content for my third article.
-                </p>`
-}
-};
+
 
 function createTemplate(data){
     var title=data.title;
@@ -119,7 +76,7 @@ app.get('/submit-name',function(req,res){
 });
 
 app.get('/articles/:articleName', function (req, res) {
-  pool.query("select * from article where title='"+req.params.articleName+"'",function(err,result){
+  pool.query("select * from article where title=$1",[req.params.articleName],function(err,result){
       if(err){
           res.status(500).send(err.toString());
       }else{
