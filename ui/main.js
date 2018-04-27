@@ -15,22 +15,39 @@ button.onclick=function(){
         //Not done yet
     };
     //Make the request
-    request.open('GET','http://sugapriyam21.imad.hasura-app.io/counter');
+    request.open('GET','http://sugapriyam21.imad.hasura-app.io/counter',true);
     request.send(null);
 };
 
 //submit name
-let nameInput=document.getElementById('name');
-let name=nameInput.value;
+
 let submit=document.getElementById('submit_btn');
 submit.onclick=function(){
   //Make a request to the server and send the name
+  //create a request object
+  var request=new XMLHttpRequest();
   //Capture a list of names and render it as a list
-  let names=['name1','name2','name3'];
-  let list="";
-  names.forEach(function(name){
-      list+="<li>"+name+"</li>";
-  });
-  let ul=document.getElementById('namelist');
-  ul.innerHTML=list;
+  request.onreadystatechange=function(){
+      if(request.readyState===XMLHttpRequest.DONE){
+          if(request.status===200){
+              let list="";
+              let names=request.responseText;
+              names=JSON.parse(names);
+              names.forEach(function(name){
+              list+="<li>"+name+"</li>";
+              });
+              let ul=document.getElementById('namelist');
+              ul.innerHTML=list;
+          }
+      }
+  };
 };
+
+let nameInput=document.getElementById('name');
+let name=nameInput.value;
+//Make the request
+request.open("GET","http://sugapriyam21.imad.hasura-app.io/submit-name?name="+name,true);
+request.send(null);
+
+
+
