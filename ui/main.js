@@ -16,4 +16,5 @@ button.onclick=function(){
     };
     //Make the request
     request.open('GET','https;//imad.hasura-app.io/counter');
+    request.send(null);
 };
