@@ -23,7 +23,6 @@ button.onclick=function(){
 
 let submit=document.getElementById('submit_btn');
 submit.onclick=function(){
-    console.log('inside');
   //Make a request to the server and send the name
   //create a request object
   var request=new XMLHttpRequest();
@@ -31,7 +30,7 @@ submit.onclick=function(){
   request.onreadystatechange=function(){
       if(request.readyState===XMLHttpRequest.DONE){
           if(request.status===200){
-              let list="";
+              var list="";
               let names=request.responseText;
               names=JSON.parse(names);
               names.forEach(function(name){
@@ -44,8 +43,8 @@ submit.onclick=function(){
   };
 };
 
-let nameInput=document.getElementById('name');
-let name=nameInput.value;
+var nameInput=document.getElementById('name');
+var name=nameInput.value;
 //Make the request
 request.open("GET","http://sugapriyam21.imad.hasura-app.io/submit-name?name="+name,true);
 request.send(null);
